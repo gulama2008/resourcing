@@ -47,6 +47,13 @@ public class Job {
         this.startDate = startDate;
         this.endDate = endDate;
     }
+
+    public Job(String name, String startDate, String endDate,Temp temp) {
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.temp = temp;
+    }
     
     
 }

@@ -8,10 +8,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.siyu.resourcingbackend.exceptions.NotFoundException;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/temps")
@@ -35,5 +39,9 @@ public class TempController {
         throw new NotFoundException(String.format("Temp with id: %d does not exist", id));
     }
 
-
+    @PostMapping
+    public ResponseEntity<Temp> createTemp(@Valid @RequestBody TempCreateDTO data) {
+        Temp newTemp = this.tempService.createTemp(data);
+        return new ResponseEntity<>(newTemp, HttpStatus.CREATED);
+    }
 }
